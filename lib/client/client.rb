@@ -1,15 +1,18 @@
 # Base class for 3taps API client classes.
 class Client
-  DEFAULT_URL = 'http://3taps.net'
+  DEFAULT_URL = 'http://search.3taps.com'
   DEFAULT_API_PORT = 80
   TIMEOUT = 15
-  # Initializes Client class with +baseUrl+ and +port+ parameters. By default 
+  API_TOKEN = "3d6f2bded70fb9d4e7f2f015b1f1f76c"
+
+  # Initializes Client class with +baseUrl+ and +port+ parameters. By default
   # DEFAULT_URL and DEFAULT_API_PORT are used. Examples:
   #  Client.new
   #  Client.new("http://3taps.com", 8080)
-  def initialize(baseUrl = DEFAULT_URL, port = DEFAULT_API_PORT)
+  def initialize(baseUrl = DEFAULT_URL, port = DEFAULT_API_PORT, auth_token = API_TOKEN)
     @baseURL = baseUrl
     @port = port
+    @auth_token = API_TOKEN
   end
 
   # Executes GET request on URL and port with +path+ and +params+ parameters.
@@ -17,8 +20,9 @@ class Client
   #
   #  execute_get("/search", "data=data")
   def execute_get( path, params = nil )
-    address = params.nil? ? path : path + '?' + params 
-    request = Curl::Easy.new("#{@baseURL}:#{@port}" + address) 
+    address = params.nil? ? path : path + '?' + "auth_token=#{@auth_token}&" + params
+    binding.pry
+    request = Curl::Easy.new("#{@baseURL}:#{@port}" + address)
     begin
       request.perform
     rescue

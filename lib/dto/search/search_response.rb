@@ -18,7 +18,10 @@
 #  response.exec_time_ms # => 100
 #  response.results      # => []
 #
-class SearchResponse < Struct.new(:success, :numResults, :execTimeMs, :results) do
+class SearchResponse < Struct.new(
+    :success, :numResults, :execTimeMs, :results, :error, :next_page, :time_search,
+    :time_taken, :anchor, :time_fetch, :num_matches, :postings, :next_tier
+  ) do
     def num_results
       numResults
     end
@@ -27,7 +30,7 @@ class SearchResponse < Struct.new(:success, :numResults, :execTimeMs, :results) 
     end
   end
 
-  # Initializer receives hash as a parameter and fills object fields from it. 
+  # Initializer receives hash as a parameter and fills object fields from it.
   # +results+ field is filled with array of Posting objects.
   def initialize(hash = {})
     hash.each do |key, value|

@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'cgi'
-require 'supermodel'
 require 'active_support'
+require 'active_model'
 require 'curb'
 require 'struct'
 

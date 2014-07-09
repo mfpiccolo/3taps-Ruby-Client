@@ -120,32 +120,26 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<supermodel>, ["~> 0.1.4"])
       s.add_runtime_dependency(%q<curb>, ["~> 0.7.9"])
-      s.add_runtime_dependency(%q<activesupport>, ["~> 3.0.0"])
+      s.add_dependency(%q<activesupport>, ["~> 4.1"])
+      s.add_dependency(%q<activemodel>, ["~> 4.1"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
     else
-      s.add_dependency(%q<supermodel>, ["~> 0.1.4"])
       s.add_dependency(%q<curb>, ["~> 0.7.9"])
-      s.add_dependency(%q<activesupport>, ["~> 3.0.0"])
+      s.add_dependency(%q<activesupport>, ["~> 4.1"])
+      s.add_dependency(%q<activemodel>, ["~> 4.1"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
     end
   else
-    s.add_dependency(%q<supermodel>, ["~> 0.1.4"])
     s.add_dependency(%q<curb>, ["~> 0.7.9"])
-    s.add_dependency(%q<activesupport>, ["~> 3.0.0"])
+    s.add_dependency(%q<activesupport>, ["~> 4.1"])
+    s.add_dependency(%q<activemodel>, ["~> 4.1"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-    s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
   end
 end

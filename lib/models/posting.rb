@@ -31,12 +31,41 @@
 #  posting.to_json_for_update        # => Array of JSON objects
 #  posting.to_json_for_status_client # => Array of JSON objects
 #  posting.to_json_for_status        # => Array of JSON objects
-class Posting < SuperModel::Base
-  attributes :postKey, :heading, :body, :category, :source, :location,
-    :longitude, :latitude, :language, :price, :currency, :images,
-    :externalURL, :externalID, :accountName, :accountID, :clickCount,
-    :timestamp, :expiration, :indexed, :trustedAnnotations,
-    :annotations, :errors, :status, :history
+class Posting
+  # attributes :postKey, :heading, :body, :category, :source, :location,
+  #   :longitude, :latitude, :language, :price, :currency, :images,
+  #   :externalURL, :externalID, :accountName, :accountID, :clickCount,
+  #   :timestamp, :expiration, :indexed, :trustedAnnotations,
+  #   :annotations, :errors, :status, :history
+
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
+
+  def self.attr_accessor(*vars)
+    @attributes ||= []
+    @attributes.concat( vars )
+    super
+  end
+
+  def self.attributes
+    @attributes
+  end
+
+  # def initialize(attributes={})
+  #   attributes && attributes.each do |name, value|
+  #     send("#{name}=", value) if respond_to? name.to_sym
+  #   end
+  # end
+
+  def persisted?
+    false
+  end
+
+  def self.inspect
+    "#<#{ self.to_s} #{ self.attributes.collect{ |e| ":#{ e }" }.join(', ') }>"
+  end
+
   def initialize(*params)
     super(*params)
     @attributes[:images] ||= []

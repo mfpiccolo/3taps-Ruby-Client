@@ -2,7 +2,7 @@ class SearchRequest
   # annotations attribute should be a Hash object
   attr_accessor :rpp, :page, :source, :category, :location, :heading,
     :body, :text, :external_id, :start, :end, :annotations,
-    :trusted_annotations, :retvals
+    :trusted_annotations, :retvals, :has_price, :status, :zip
 
   def add_retval(retval)
     @retvals << retval
@@ -31,6 +31,10 @@ class SearchRequest
       query[:location] = location.to_s;
       url_params += "location=#{CGI.escape(query[:location])}&"
     end
+    if (zip != nil)
+      query[:zip] = zip.to_s;
+      url_params += "location.zipcode=#{CGI.escape(query[:zip])}&"
+    end
     if (heading != nil)
       query[:heading] = heading.to_s;
       url_params += "heading=#{CGI.escape(query[:heading])}&"
@@ -46,6 +50,14 @@ class SearchRequest
     if (external_id != nil)
       query[:external_id] = external_id.to_s;
       url_params += "external_id=#{CGI.escape(query[:external_id])}&"
+    end
+    if (has_price != nil)
+      query[:has_price] = has_price.to_s;
+      url_params += "has_price=#{CGI.escape(query[:has_price])}&"
+    end
+    if (status != nil)
+      query[:status] = status.to_s;
+      url_params += "status=#{CGI.escape(query[:status])}&"
     end
     if (start != nil)
       query[:start] = start.to_s;
@@ -73,7 +85,7 @@ class SearchRequest
       query[:retvals] = retvals.join(',')  #queryParams.put("retvals", Utils.join(retvals));
       url_params += "retvals=#{CGI.escape(query[:retvals])}&"
     end
-    
+
     url_params
   end
 end
